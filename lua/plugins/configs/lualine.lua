@@ -1,3 +1,5 @@
+local icons = require("plugins.configs.defaults").icons
+
 require('lualine').setup({
   options = {
     theme = 'auto',
@@ -9,23 +11,39 @@ require('lualine').setup({
     globalstatus = true,
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch' },
+    lualine_c = {
+      {
+        "diagnostics",
+        symbols = {
+          error = icons.diagnostics.Error,
+          warn = icons.diagnostics.Warn,
+          info = icons.diagnostics.Info,
+          hint = icons.diagnostics.Hint,
+        },
+      },
+      { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+      { "filename", path = 1 },},
+    lualine_x = {
+      {
+        "diff",
+        symbols = {
+          added = icons.git.added,
+          modified = icons.git.modified,
+          removed = icons.git.removed,
+        },
+      },
+    },
+    lualine_y = {
+      { "progress", separator = " ", padding = { left = 1, right = 0 } },
+      { "location", padding = { left = 0, right = 1 } },
+    },
+    lualine_z = {
+      function()
+        return " " .. os.date("%R")
+      end,
+    },
   },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  winbar = {},
-  inactive_winbar = {},
-  extensions = {}
+  extensions = { "neo-tree", "lazy" },
 })
