@@ -1,14 +1,23 @@
 local plugins = {
   "nvim-lua/plenary.nvim",
 
-  -- colorscheme
+  -- colorschemes
   {
     "navarasu/onedark.nvim",
-    priority = 1000,
     config = function()
       require("onedark").setup {
         style = "darker",
       }
+    end,
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      -- load the colorscheme here
+      require "plugins.configs.tokyonight"
+      vim.cmd([[colorscheme tokyonight]])
     end,
   },
   -- file explorer
@@ -19,6 +28,7 @@ local plugins = {
        require "plugins.configs.nvimtree"
     end,
   },
+  -- statusline
   {
     'nvim-lualine/lualine.nvim',
     event = "VeryLazy",
@@ -57,6 +67,7 @@ local plugins = {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
+      "onsails/lspkind.nvim",
 
       -- snippets engine
       {

@@ -1,6 +1,6 @@
 return {
   defaults = { lazy = true },
-  install = { colorscheme = { "onedark" } },
+  -- install = { colorscheme = { "onedark" } },
   checker = { enabled = true },
   performance = {
     rtp = {
