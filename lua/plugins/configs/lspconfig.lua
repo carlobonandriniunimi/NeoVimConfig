@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "<space>f", function()
-      vim.lsp.buf.format { async = true }
+      vim.lsp.buf.format({ async = true })
     end, opts)
   end,
 })
@@ -52,9 +52,9 @@ capabilities.textDocument.completion.completionItem = {
   },
 }
 -- Setup language servers.
-local lspconfig = require "lspconfig"
+local lspconfig = require("lspconfig")
 
-lspconfig.lua_ls.setup {
+lspconfig.lua_ls.setup({
   capabilities = capabilities,
   settings = {
     Lua = {
@@ -63,21 +63,21 @@ lspconfig.lua_ls.setup {
       },
       workspace = {
         library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
         },
         maxPreload = 100000,
         preloadFileSize = 10000,
       },
     },
   },
-}
+})
 
 -- setup multiple servers with same default options
 local servers = { "tsserver", "html", "cssls" }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  lspconfig[lsp].setup({
     capabilities = capabilities,
-  }
+  })
 end

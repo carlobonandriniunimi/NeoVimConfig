@@ -1,18 +1,18 @@
 local icons = require("plugins.configs.defaults").icons
 
-require('lualine').setup({
+require("lualine").setup({
   options = {
-    theme = 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    theme = "auto",
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
     disabled_filetypes = {
       statusline = { "dashboard", "alpha" },
     },
     globalstatus = true,
   },
   sections = {
-    lualine_a = { 'mode' },
-    lualine_b = { 'branch' },
+    lualine_a = { "mode" },
+    lualine_b = { "branch" },
     lualine_c = {
       {
         "diagnostics",
@@ -24,7 +24,8 @@ require('lualine').setup({
         },
       },
       { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-      { "filename" },},
+      { "filename" },
+    },
     lualine_x = {
       {
         "diff",
@@ -40,7 +41,6 @@ require('lualine').setup({
     },
     lualine_z = {
       { "progress", separator = " ", padding = { left = 1, right = 1 } },
-
     },
   },
   extensions = { "neo-tree", "lazy" },

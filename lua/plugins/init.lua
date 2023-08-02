@@ -5,18 +5,18 @@ local plugins = {
   {
     "navarasu/onedark.nvim",
     config = function()
-      require("onedark").setup {
+      require("onedark").setup({
         style = "darker",
-      }
+      })
     end,
   },
   {
     "folke/tokyonight.nvim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,  -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- load the colorscheme here
-      require "plugins.configs.tokyonight"
+      require("plugins.configs.tokyonight")
       vim.cmd([[colorscheme tokyonight]])
     end,
   },
@@ -25,17 +25,17 @@ local plugins = {
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle" },
     config = function()
-       require "plugins.configs.nvimtree"
+      require("plugins.configs.nvimtree")
     end,
   },
   -- statusline
   {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function ()
-      require "plugins.configs.lualine"
-    end
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("plugins.configs.lualine")
+    end,
   },
   -- icons, for UI related plugins
   {
@@ -51,7 +51,7 @@ local plugins = {
     build = ":TSUpdate",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require "plugins.configs.treesitter"
+      require("plugins.configs.treesitter")
     end,
   },
   -- UI
@@ -66,8 +66,8 @@ local plugins = {
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
-    config = function ()
-      require "plugins.configs.noice"
+    config = function()
+      require("plugins.configs.noice")
     end,
   },
   {
@@ -75,7 +75,7 @@ local plugins = {
     event = "VeryLazy",
     config = function()
       require("notifier").setup()
-    end
+    end,
   },
   -- we use cmp plugin only when in insert mode
   -- so lets lazyload it at InsertEnter event, to know all the events check h-events
@@ -106,14 +106,14 @@ local plugins = {
           require("nvim-autopairs").setup()
 
           --  cmp integration
-          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-          local cmp = require "cmp"
+          local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+          local cmp = require("cmp")
           cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end,
       },
     },
     config = function()
-      require "plugins.configs.cmp"
+      require("plugins.configs.cmp")
     end,
   },
 
@@ -131,14 +131,14 @@ local plugins = {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require "plugins.configs.lspconfig"
+      require("plugins.configs.lspconfig")
     end,
     dependencies = {
       -- formatting , linting
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
-          require "plugins.configs.null"
+          require("plugins.configs.null")
         end,
       },
     },
@@ -158,7 +158,7 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     config = function()
-      require "plugins.configs.telescope"
+      require("plugins.configs.telescope")
     end,
   },
 
@@ -180,4 +180,4 @@ local plugins = {
   },
 }
 
-require("lazy").setup(plugins, require "plugins.configs.lazy")
+require("lazy").setup(plugins, require("plugins.configs.lazy"))

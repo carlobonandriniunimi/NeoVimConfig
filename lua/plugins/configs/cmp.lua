@@ -20,7 +20,7 @@ end
 cmp.setup({
   window = {
     completion = {
-      border = border "CmpDocBorder",
+      border = border("CmpDocBorder"),
       -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel",
       winhighlight = "Normal:None",
       scrollbar = false,
@@ -28,20 +28,19 @@ cmp.setup({
     documentation = {
       -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu",
       winhighlight = "Normal:None",
-      border = border "CmpDocBorder",
+      border = border("CmpDocBorder"),
       max_width = 80,
       max_height = 15,
     },
   },
   enabled = function()
     -- disable completion in comments
-    local context = require 'cmp.config.context'
+    local context = require("cmp.config.context")
     -- keep command mode completion enabled when cursor is in a comment
-    if vim.api.nvim_get_mode().mode == 'c' then
+    if vim.api.nvim_get_mode().mode == "c" then
       return true
     else
-      return not context.in_treesitter_capture("comment")
-        and not context.in_syntax_group("Comment")
+      return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
     end
   end,
   snippet = {
@@ -55,7 +54,7 @@ cmp.setup({
       local kind = require("lspkind").cmp_format({
         symbol_map = icons,
         mode = "symbol_text",
-        maxwidth = 35
+        maxwidth = 35,
       })(entry, vim_item)
       local strings = vim.split(kind.kind, "%s", { trimempty = true })
       kind.kind = (strings[1] or "") .. " "
@@ -90,4 +89,3 @@ cmp.setup({
     },
   },
 })
-

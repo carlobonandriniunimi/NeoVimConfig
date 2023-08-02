@@ -1,4 +1,4 @@
-require("telescope").setup {
+require("telescope").setup({
   defaults = {
     sorting_strategy = "ascending",
     layout_config = {
@@ -22,6 +22,6 @@ require("telescope").setup {
   pickers = {
     colorscheme = {
       enable_preview = true,
-    }
+    },
   },
-}
+})
