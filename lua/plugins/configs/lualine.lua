@@ -40,6 +40,7 @@ require('lualine').setup({
     },
     lualine_z = {
       { "progress", separator = " ", padding = { left = 1, right = 1 } },
+
     },
   },
   extensions = { "neo-tree", "lazy" },

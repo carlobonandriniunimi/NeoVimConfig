@@ -1,7 +1,15 @@
 return {
   defaults = { lazy = true },
-  -- install = { colorscheme = { "onedark" } },
+  install = { colorscheme = { "tokyonight" } },
   checker = { enabled = true },
+  ui = {
+    icons = {
+      ft = "",
+      lazy = "󰂠 ",
+      loaded = "",
+      not_loaded = "",
+    },
+  },
   performance = {
     rtp = {
       disabled_plugins = {

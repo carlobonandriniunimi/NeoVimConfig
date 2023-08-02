@@ -38,7 +38,6 @@ require("nvim-tree").setup({
   },
   git = {
     enable = false,
-    ignore = true,
   },
   filesystem_watchers = {
     enable = true,
@@ -62,7 +61,7 @@ require("nvim-tree").setup({
         file = true,
         folder = true,
         folder_arrow = true,
-        git = false,
+        git = true,
       },
       glyphs = {
         git = {

@@ -54,7 +54,29 @@ local plugins = {
       require "plugins.configs.treesitter"
     end,
   },
-
+  -- UI
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    },
+    config = function ()
+      require "plugins.configs.noice"
+    end,
+  },
+  {
+    "vigoux/notifier.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("notifier").setup()
+    end
+  },
   -- we use cmp plugin only when in insert mode
   -- so lets lazyload it at InsertEnter event, to know all the events check h-events
   -- completion , now all of these plugins are dependent on cmp, we load them after cmp
