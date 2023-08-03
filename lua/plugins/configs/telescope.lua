@@ -15,8 +15,16 @@ require("telescope").setup({
       preview_cutoff = 120,
     },
     mappings = {
-      n = { ["q"] = require("telescope.actions").close },
-      i = { ["<esc>"] = require("telescope.actions").close },
+      n = {
+        ["q"] = require("telescope.actions").close,
+      },
+      i = {
+        ["<esc>"] = require("telescope.actions").close,
+        ["<C-j>"] = require("telescope.actions").move_selection_next,
+        ["<C-k>"] = require("telescope.actions").move_selection_previous,
+        ["<C-f>"] = require("telescope.actions").preview_scrolling_down,
+        ["<C-b>"] = require("telescope.actions").preview_scrolling_up,
+      },
     },
   },
   pickers = {

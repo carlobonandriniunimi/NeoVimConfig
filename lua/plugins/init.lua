@@ -1,26 +1,17 @@
 local plugins = {
   "nvim-lua/plenary.nvim",
-
-  -- colorschemes
   {
-    "navarasu/onedark.nvim",
-    config = function()
-      require("onedark").setup({
-        style = "darker",
-      })
+    "catppuccin/nvim",
+    lazy = false,
+    priority = 1000,
+    opts = function()
+      return require("plugins.configs.themes").catppuccin
+    end,
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
+      vim.cmd("colorscheme catppuccin")
     end,
   },
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,  -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      -- load the colorscheme here
-      require("plugins.configs.tokyonight")
-      vim.cmd([[colorscheme tokyonight]])
-    end,
-  },
-  -- file explorer
   {
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle" },
@@ -59,27 +50,30 @@ local plugins = {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
     config = function()
       require("plugins.configs.noice")
     end,
   },
-  {
-    "vigoux/notifier.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("notifier").setup()
-    end,
-  },
   -- we use cmp plugin only when in insert mode
   -- so lets lazyload it at InsertEnter event, to know all the events check h-events
   -- completion , now all of these plugins are dependent on cmp, we load them after cmp
+  {
+    "akinsho/toggleterm.nvim",
+    cmd = "ToggleTerm",
+    keys = {
+      {
+        "<leader>gg",
+        "<cmd>lua _LAZYGIT_TOGGLE()<cr>",
+        desc = "Lazygit",
+      },
+    },
+    config = function()
+      require("plugins.configs.toggleterm")
+    end,
+  },
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -88,8 +82,8 @@ local plugins = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
       "onsails/lspkind.nvim",
+      "folke/neodev.nvim",
 
       -- snippets engine
       {
@@ -122,7 +116,7 @@ local plugins = {
     build = ":MasonUpdate",
     cmd = { "Mason", "MasonInstall" },
     config = function()
-      require("mason").setup()
+      require("plugins.configs.mason")
     end,
   },
 
@@ -148,8 +142,11 @@ local plugins = {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("indent_blankline").setup()
+    opts = function()
+      return require("plugins.configs.others").blankline
+    end,
+    config = function(_, opts)
+      require("indent_blankline").setup(opts)
     end,
   },
 
@@ -165,17 +162,51 @@ local plugins = {
   -- git status on signcolumn etc
   {
     "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("gitsigns").setup()
+    ft = { "gitcommit", "diff" },
+    init = function()
+      -- load gitsigns only when a git file is opened
+      vim.api.nvim_create_autocmd({ "BufRead" }, {
+        group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
+        callback = function()
+          vim.fn.system("git -C " .. '"' .. vim.fn.expand("%:p:h") .. '"' .. " rev-parse")
+          if vim.v.shell_error == 0 then
+            vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
+            vim.schedule(function()
+              require("lazy").load({ plugins = { "gitsigns.nvim" } })
+            end)
+          end
+        end,
+      })
+    end,
+    opts = function()
+      return require("plugins.configs.others").gitsigns
+    end,
+    config = function(_, opts)
+      require("gitsigns").setup(opts)
     end,
   },
-
+  {
+    "nvim-pack/nvim-spectre",
+    cmd = "Spectre",
+    opts = { open_cmd = "noswapfile vnew" },
+    -- stylua: ignore
+    keys = {
+      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+    },
+  },
   -- comment plugin
   {
     "numToStr/Comment.nvim",
-    config = function()
-      require("Comment").setup()
+    keys = {
+      { "gcc", mode = "n",          desc = "Comment toggle current line" },
+      { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
+      { "gc",  mode = "x",          desc = "Comment toggle linewise (visual)" },
+      { "gbc", mode = "n",          desc = "Comment toggle current block" },
+      { "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+      { "gb",  mode = "x",          desc = "Comment toggle blockwise (visual)" },
+    },
+    config = function(_, opts)
+      require("Comment").setup(opts)
     end,
   },
 }

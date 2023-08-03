@@ -4,31 +4,31 @@ vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 local icons = require("plugins.configs.defaults").icons.kinds
 
 -- function for setting the border
-local function border(hl_name)
-  return {
-    { "╭", hl_name },
-    { "─", hl_name },
-    { "╮", hl_name },
-    { "│", hl_name },
-    { "╯", hl_name },
-    { "─", hl_name },
-    { "╰", hl_name },
-    { "│", hl_name },
-  }
-end
+-- local function border(hl_name)
+--   return {
+--     { "╭", hl_name },
+--     { "─", hl_name },
+--     { "╮", hl_name },
+--     { "│", hl_name },
+--     { "╯", hl_name },
+--     { "─", hl_name },
+--     { "╰", hl_name },
+--     { "│", hl_name },
+--   }
+-- end
 
 cmp.setup({
   window = {
     completion = {
-      border = border("CmpDocBorder"),
-      -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel",
-      winhighlight = "Normal:None",
+      -- border = border("CmpDocBorder"),
+      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel",
+      -- winhighlight = "Normal:None",
       scrollbar = false,
     },
     documentation = {
-      -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu",
-      winhighlight = "Normal:None",
-      border = border("CmpDocBorder"),
+      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu",
+      -- winhighlight = "Normal:None",
+      -- border = border("CmpDocBorder"),
       max_width = 80,
       max_height = 15,
     },
@@ -79,7 +79,6 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "nvim_lua" },
     { name = "buffer" },
     { name = "path" },
   }),

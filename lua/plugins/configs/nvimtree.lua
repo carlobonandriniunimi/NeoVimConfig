@@ -46,6 +46,10 @@ require("nvim-tree").setup({
     open_file = {
       resize_window = true,
     },
+    change_dir = {
+      enable = true,
+      global = true,
+    },
   },
   renderer = {
     root_folder_label = false,

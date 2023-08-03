@@ -1,10 +1,15 @@
+require("notify").setup({
+  background_colour = "#000000",
+})
+
+
 require("noice").setup({
   presets = {
-    bottom_search = true,       -- use a classic bottom cmdline for search
-    command_palette = true,     -- position the cmdline and popupmenu together
+    bottom_search = true,         -- use a classic bottom cmdline for search
+    command_palette = true,       -- position the cmdline and popupmenu together
     long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false,         -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = true,      -- add a border to hover docs and signature help
+    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = true,        -- add a border to hover docs and signature help
   },
   lsp = {
     progress = {
@@ -27,6 +32,20 @@ require("noice").setup({
     hover = {
       enabled = true,
       silent = true, -- set to true to not show a message if hover is not available
+    },
+  },
+  routes = {
+    {
+      view = "notify",
+      filter = { event = "msg_showmode" },
+    },
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "written",
+      },
+      opts = { skip = true },
     },
   },
 })
