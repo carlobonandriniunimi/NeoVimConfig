@@ -26,16 +26,7 @@ require("lualine").setup({
 			{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 			{ "filename" },
 		},
-		lualine_x = {
-			{
-				"diff",
-				symbols = {
-					added = icons.git.added,
-					modified = icons.git.modified,
-					removed = icons.git.removed,
-				},
-			},
-		},
+		lualine_x = {},
 		lualine_y = {
 			{ "location", padding = { left = 0, right = 1 } },
 		},

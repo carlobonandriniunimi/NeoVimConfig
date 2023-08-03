@@ -129,6 +129,7 @@ local plugins = {
 		end,
 		dependencies = {
 			-- formatting , linting
+			"williamboman/mason-lspconfig.nvim",
 			{
 				"jose-elias-alvarez/null-ls.nvim",
 				config = function()
@@ -136,6 +137,14 @@ local plugins = {
 				end,
 			},
 		},
+	},
+	{
+		"folke/trouble.nvim",
+		cmd = "Trouble",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = function()
+			return require("plugins.configs.trouble")
+		end,
 	},
 
 	-- indent lines

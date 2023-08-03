@@ -9,6 +9,14 @@ M.catppuccin = {
 		shade = "dark",
 		percentage = 0.15, -- percentage of the shade to apply to the inactive window
 	},
+	custom_highlights = function(colors)
+		return {
+			PmenuSbar = { fg = colors.none, bg = colors.none },
+			PmenuThumb = { fg = colors.none, bg = colors.none },
+			TelescopeNormal = { bg = colors.base },
+			TelescopeBorder = { fg = colors.base, bg = colors.base },
+		}
+	end,
 	integrations = {
 		alpha = true,
 		cmp = true,

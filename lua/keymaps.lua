@@ -55,3 +55,17 @@ map("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Hor
 map("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "Vertical" })
 map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = "Float" })
 map("n", "<leader>tt", "<cmd>ToggleTerm direction=tab<cr>", { desc = "Tab" })
+
+-- trouble
+map("n", "gr", function()
+	require("trouble").open("lsp_references")
+end, { desc = "Goto references" })
+map("n", "ge", function()
+	require("trouble").open("document_diagnostics")
+end, { desc = "File Diagnostics" })
+map("n", "<leader>ef", function()
+	require("trouble").open("document_diagnostics")
+end, { desc = "File Diagnostics" })
+map("n", "<space>ew", function()
+	require("trouble").open("document_diagnostics")
+end, { desc = "Workspace Diagnostics" })
