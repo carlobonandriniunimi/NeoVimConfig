@@ -115,9 +115,9 @@ local plugins = {
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
 		cmd = { "Mason", "MasonInstall" },
-    dependencies = {
-      "neovim/nvim-lspconfig",
-    }
+		dependencies = {
+			"neovim/nvim-lspconfig",
+		},
 	},
 
 	-- lsp

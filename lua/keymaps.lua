@@ -45,7 +45,7 @@ map("n", "<leader>hc", "<cmd> Telescope colorscheme <CR>")
 
 -- comment.nvim
 map("n", "<leader>/", function()
-  require("Comment.api").toggle.linewise.current()
+	require("Comment.api").toggle.linewise.current()
 end)
 map("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>")
 
