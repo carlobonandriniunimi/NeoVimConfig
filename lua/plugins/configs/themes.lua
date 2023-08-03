@@ -24,7 +24,7 @@ M.catppuccin = {
 		gitsigns = true,
 		illuminate = true,
 		indent_blankline = { enabled = true },
-		lsp_trouble = true,
+		lsp_trouble = false,
 		mason = true,
 		mini = true,
 		native_lsp = {
