@@ -18,9 +18,13 @@ local icons = require("plugins.configs.defaults").icons.kinds
 -- end
 
 cmp.setup({
-	preselect = "item",
+	preselect = cmp.PreselectMode.Item,
 	completion = {
-		completeopt = "menu,menuone,noinsert",
+		autocomplete = {
+			cmp.TriggerEvent.TextChanged,
+			cmp.TriggerEvent.InsertEnter,
+		},
+		completeopt = "menu,menuone",
 	},
 	window = {
 		completion = {

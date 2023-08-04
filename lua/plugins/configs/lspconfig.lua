@@ -158,6 +158,7 @@ local capabilities = vim.tbl_deep_extend(
 
 local function setup(server)
 	local server_opts = vim.tbl_deep_extend("force", {
+		---@diagnostic disable-next-line: param-type-mismatch
 		capabilities = vim.deepcopy(capabilities),
 	}, servers[server] or {})
 

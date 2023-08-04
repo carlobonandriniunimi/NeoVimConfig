@@ -15,6 +15,7 @@ M.catppuccin = {
 			PmenuThumb = { fg = colors.none, bg = colors.none },
 			TelescopeNormal = { bg = colors.base },
 			TelescopeBorder = { fg = colors.base, bg = colors.base },
+			-- MiniIndentscopeSymbol = { fg = "#12a4e3" },
 		}
 	end,
 	integrations = {

@@ -47,6 +47,33 @@ local plugins = {
 	},
 	-- UI
 	{
+		"stevearc/dressing.nvim",
+		lazy = true,
+		opts = {
+			input = {
+				title_pos = "center",
+				-- 'editor' and 'win' will default to being centered
+				relative = "cursor",
+				min_width = { 40, 0.2 },
+				win_options = {
+					sidescrolloff = 8,
+				},
+			},
+		},
+		init = function()
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.select = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.select(...)
+			end
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.input = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.input(...)
+			end
+		end,
+	},
+	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		dependencies = {
@@ -158,7 +185,6 @@ local plugins = {
 			require("indent_blankline").setup(opts)
 		end,
 	},
-
 	-- files finder etc
 	{
 		"nvim-telescope/telescope.nvim",

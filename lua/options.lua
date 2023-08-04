@@ -5,7 +5,7 @@ vim.g.localmapleader = " "
 
 opt.autowrite = true -- Enable auto write
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
-opt.completeopt = "menu,menuone,preview,noselect"
+opt.completeopt = "menu,menuone,preview"
 opt.conceallevel = 3 -- Hide * markup for bold and italic
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
