@@ -5,6 +5,7 @@ map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 map("n", ";", ":")
 map("n", "<leader>x", "<cmd> bdelete <CR>")
 map("n", "<leader>q", "<cmd> qa <CR>")
+map("n", "<leader>cc", "<cmd> cd ~/.config/nvim <CR>", { desc = "CD Config" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
