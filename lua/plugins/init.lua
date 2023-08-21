@@ -13,6 +13,18 @@ local plugins = {
 		end,
 	},
 	{
+		"folke/tokyonight.nvim",
+		lazy = true, -- Change if needed
+		priority = 1000,
+		opts = function()
+			return require("plugins.configs.themes").tokyonight
+		end,
+		-- config = function(_, opts)
+		-- 	require("tokyonight").setup(opts)
+		-- 	vim.cmd("colorscheme tokyonight")
+		-- end,
+	},
+	{
 		"nvim-tree/nvim-tree.lua",
 		cmd = { "NvimTreeToggle" },
 		config = function()
@@ -26,6 +38,14 @@ local plugins = {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("plugins.configs.lualine")
+		end,
+	},
+	{
+		"akinsho/bufferline.nvim",
+		event = "VeryLazy",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		opts = function()
+			return require("plugins.configs.bufferline")
 		end,
 	},
 	-- icons, for UI related plugins
@@ -84,9 +104,14 @@ local plugins = {
 			require("plugins.configs.noice")
 		end,
 	},
-	-- we use cmp plugin only when in insert mode
-	-- so lets lazyload it at InsertEnter event, to know all the events check h-events
-	-- completion , now all of these plugins are dependent on cmp, we load them after cmp
+	{
+		"j-hui/fidget.nvim",
+		tag = "legacy", -- NOTE: check when this is updated
+		event = "LspAttach",
+		opts = function()
+			return require("plugins.configs.lsp").fidget
+		end,
+	},
 	{
 		"akinsho/toggleterm.nvim",
 		cmd = "ToggleTerm",
@@ -111,6 +136,16 @@ local plugins = {
 			"hrsh7th/cmp-nvim-lsp",
 			"onsails/lspkind.nvim",
 			"folke/neodev.nvim",
+
+			-- Copilot
+			{
+				"zbirenbaum/copilot.lua",
+				cmd = "Copilot",
+				event = "InsertEnter",
+				config = function()
+					require("plugins.configs.copilot")
+				end,
+			},
 
 			-- snippets engine
 			{
@@ -137,7 +172,6 @@ local plugins = {
 			require("plugins.configs.cmp")
 		end,
 	},
-
 	{
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",

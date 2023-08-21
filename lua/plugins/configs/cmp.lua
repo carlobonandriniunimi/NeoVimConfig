@@ -1,30 +1,62 @@
 local cmp = require("cmp")
+local luasnip = require("luasnip")
 vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
 local icons = require("plugins.configs.defaults").icons.kinds
 
+-- Disable snippet expansion in normal mode
+vim.api.nvim_create_autocmd("ModeChanged", {
+	group = vim.api.nvim_create_augroup("UnlinkSnippetOnModeChange", { clear = true }),
+	pattern = { "s:n", "i:*" },
+	callback = function(event)
+		if luasnip.session and luasnip.session.current_nodes[event.buf] and not luasnip.session.jump_active then
+			luasnip.unlink_current()
+		end
+	end,
+})
+
+local types = require("luasnip.util.types")
+luasnip.setup({
+	-- Display a cursor-like placeholder in unvisited nodes
+	-- of the snippet.
+	ext_opts = {
+		[types.insertNode] = {
+			unvisited = {
+				virt_text = { { "|", "Conceal" } },
+				virt_text_pos = "inline",
+			},
+		},
+		[types.exitNode] = {
+			unvisited = {
+				virt_text = { { "|", "Conceal" } },
+				virt_text_pos = "inline",
+			},
+		},
+	},
+})
+
 -- function for setting the border
 -- local function border(hl_name)
---   return {
---     { "╭", hl_name },
---     { "─", hl_name },
---     { "╮", hl_name },
---     { "│", hl_name },
---     { "╯", hl_name },
---     { "─", hl_name },
---     { "╰", hl_name },
---     { "│", hl_name },
---   }
+-- 	return {
+-- 		{ "╭", hl_name },
+-- 		{ "─", hl_name },
+-- 		{ "╮", hl_name },
+-- 		{ "│", hl_name },
+-- 		{ "╯", hl_name },
+-- 		{ "─", hl_name },
+-- 		{ "╰", hl_name },
+-- 		{ "│", hl_name },
+-- 	}
 -- end
 
 cmp.setup({
-	preselect = cmp.PreselectMode.Item,
+	-- preselect = cmp.PreselectMode.Item,
 	completion = {
 		autocomplete = {
 			cmp.TriggerEvent.TextChanged,
 			cmp.TriggerEvent.InsertEnter,
 		},
-		completeopt = "menu,menuone",
+		completeopt = "menu,menuone,noselect",
 	},
 	window = {
 		completion = {
@@ -32,13 +64,14 @@ cmp.setup({
 			winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel",
 			-- winhighlight = "Normal:None",
 			scrollbar = false,
+			max_width = 5,
 		},
 		documentation = {
 			winhighlight = "Normal:Pmenu,FloatBorder:Pmenu",
 			-- winhighlight = "Normal:None",
 			-- border = border("CmpDocBorder"),
 			max_width = 80,
-			max_height = 15,
+			max_height = 20,
 		},
 	},
 	enabled = function()
@@ -61,11 +94,12 @@ cmp.setup({
 		format = function(entry, vim_item)
 			local kind = require("lspkind").cmp_format({
 				symbol_map = icons,
-				mode = "symbol_text",
+				mode = "symbol",
 				maxwidth = 35,
 			})(entry, vim_item)
 			local strings = vim.split(kind.kind, "%s", { trimempty = true })
 			kind.kind = (strings[1] or "") .. " "
+			kind.menu = ""
 
 			return kind
 		end,
@@ -80,7 +114,20 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-		["<Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		-- ["<Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		["<Tab>"] = cmp.mapping(function(fallback)
+			local copilot = require("copilot.suggestion")
+
+			if copilot.is_visible() then
+				copilot.accept()
+			elseif luasnip.expand_or_locally_jumpable() then
+				luasnip.expand_or_jump()
+			elseif cmp.visible() then
+				cmp.confirm({ select = true })
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 		["<S-CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
@@ -91,9 +138,4 @@ cmp.setup({
 		{ name = "buffer" },
 		{ name = "path" },
 	}),
-	experimental = {
-		ghost_text = {
-			hl_group = "CmpGhostText",
-		},
-	},
 })

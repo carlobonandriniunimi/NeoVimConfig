@@ -5,6 +5,9 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
 	sources = {
 		format.stylua, -- for lua
+		format.black,
+		format.ocamlformat,
+		format.erlfmt,
 	},
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
