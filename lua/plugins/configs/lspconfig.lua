@@ -57,7 +57,7 @@ require("mason").setup({
 
 -- Options for lsp
 local opts = {
-	ensure_installed = {},
+	ensure_installed = { "pyright", "erlang_ls" },
 	diagnostics = {
 		underline = false,
 		update_in_insert = false,
