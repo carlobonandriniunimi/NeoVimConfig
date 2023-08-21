@@ -42,7 +42,7 @@ local plugins = {
 	},
 	{
 		"akinsho/bufferline.nvim",
-		event = "VeryLazy",
+		event = "BufAdd",
 		dependencies = "nvim-tree/nvim-web-devicons",
 		opts = function()
 			return require("plugins.configs.bufferline")

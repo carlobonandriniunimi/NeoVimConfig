@@ -34,5 +34,5 @@ require("lualine").setup({
 			{ "progress", separator = " ", padding = { left = 1, right = 1 } },
 		},
 	},
-	extensions = { "neo-tree", "lazy" },
+	extensions = { "nvim-tree", "lazy" },
 })
