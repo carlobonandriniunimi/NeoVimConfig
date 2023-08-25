@@ -18,6 +18,7 @@ opt.inccommand = "nosplit" -- preview incremental substitute
 opt.laststatus = 0
 opt.list = true -- Show some invisible characters (tabs...
 opt.mouse = "a" -- Enable mouse mode
+opt.ruler = false -- Removes cursor position info in bottom-right
 opt.number = true -- Print line number
 opt.pumblend = 0 -- Popub blend (Completition window)
 opt.pumheight = 12 -- Maximum number of entries in a popup (Completition window)

@@ -11,7 +11,7 @@ local opts = {
 			accept_line = "<M-l>",
 			next = "<M-]>",
 			prev = "<M-[>",
-			dismiss = "/",
+			dismiss = "<C-e>",
 		},
 	},
 	filetypes = { markdown = true },

@@ -34,6 +34,7 @@ local plugins = {
 	-- statusline
 	{
 		"nvim-lualine/lualine.nvim",
+		enabled = true,
 		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
@@ -67,8 +68,12 @@ local plugins = {
 	},
 	-- UI
 	{
+		"nmac427/guess-indent.nvim",
+		event = "BufReadPre",
+		opts = {},
+	},
+	{
 		"stevearc/dressing.nvim",
-		lazy = true,
 		opts = {
 			input = {
 				title_pos = "center",
@@ -197,6 +202,14 @@ local plugins = {
 					require("plugins.configs.null")
 				end,
 			},
+		},
+	},
+	-- Scala
+	{
+		"scalameta/nvim-metals",
+		ft = "scala",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
 		},
 	},
 	{

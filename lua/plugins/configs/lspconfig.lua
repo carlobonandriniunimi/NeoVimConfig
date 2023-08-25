@@ -59,7 +59,7 @@ require("mason").setup({
 local opts = {
 	ensure_installed = { "pyright", "erlangls" },
 	diagnostics = {
-		underline = false,
+		underline = true,
 		update_in_insert = false,
 		virtual_text = {
 			spacing = 4,
