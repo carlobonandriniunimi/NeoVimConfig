@@ -33,7 +33,7 @@ require("neodev").setup({})
 
 -- Mason settings
 require("mason").setup({
-	ensure_installed = { "lua-language-server" }, -- not an option from mason.nvim
+	ensure_installed = { "lua-language-server", "stylua" }, -- not an option from mason.nvim
 	PATH = "skip",
 	ui = {
 		icons = {

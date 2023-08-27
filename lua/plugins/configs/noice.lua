@@ -1,9 +1,11 @@
-require("notify").setup({
+local M = {}
+
+M.notify = {
 	background_colour = "#000000",
 	timeout = 0,
-})
+}
 
-require("noice").setup({
+M.noice = {
 	presets = {
 		bottom_search = true, -- use a classic bottom cmdline for search
 		command_palette = true, -- position the cmdline and popupmenu together
@@ -48,4 +50,34 @@ require("noice").setup({
 			opts = { skip = true },
 		},
 	},
-})
+}
+
+M.dressing = {
+	input = {
+		-- Set to false to disable the vim.ui.input implementation
+		enabled = true,
+		-- Default prompt string
+		default_prompt = "Input:",
+		-- Can be 'left', 'right', or 'center'
+		title_pos = "center",
+		-- These are passed to nvim_open_win
+		border = "rounded",
+		-- 'editor' and 'win' will default to being centered
+		relative = "cursor",
+
+		min_width = { 40, 0.2 },
+
+		win_options = {
+			-- Increase this for more context when text scrolls off the window
+			sidescrolloff = 8,
+		},
+	},
+	select = {
+		-- Set to false to disable the vim.ui.select implementation
+		enabled = true,
+		-- Priority list of preferred vim.select implementations
+		backend = { "telescope", "fzf_lua", "fzf", "builtin", "nui" },
+	},
+}
+
+return M
