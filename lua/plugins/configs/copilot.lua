@@ -9,7 +9,7 @@ local opts = {
 			accept = false,
 			accept_word = "<M-w>",
 			accept_line = "<M-l>",
-			next = "<M-]>",
+			next = "<M-]>", -- option + ]
 			prev = "<M-[>",
 			dismiss = "<C-e>",
 		},

@@ -1,5 +1,8 @@
 local M = {}
 
+-- Fidget.nvim color to remove the background
+vim.api.nvim_set_hl(0, "FidgetTask", { bg = "#1E1E2D" })
+
 M.catppuccin = {
 	flavour = "mocha", -- latte, frappe, macchiato, mocha
 	transparent_background = false, -- disables setting the background color.
