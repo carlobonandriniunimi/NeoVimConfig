@@ -31,5 +31,8 @@ require("telescope").setup({
 		colorscheme = {
 			enable_preview = true,
 		},
+		find_files = {
+			hidden = false, -- Show hidden files
+		},
 	},
 })

@@ -15,26 +15,6 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 	end,
 })
 
-local types = require("luasnip.util.types")
-luasnip.setup({
-	-- Display a cursor-like placeholder in unvisited nodes
-	-- of the snippet.
-	ext_opts = {
-		[types.insertNode] = {
-			unvisited = {
-				virt_text = { { "|", "Conceal" } },
-				virt_text_pos = "inline",
-			},
-		},
-		[types.exitNode] = {
-			unvisited = {
-				virt_text = { { "|", "Conceal" } },
-				virt_text_pos = "inline",
-			},
-		},
-	},
-})
-
 -- function for setting the border
 -- local function border(hl_name)
 -- 	return {
@@ -75,6 +55,10 @@ cmp.setup({
 		},
 	},
 	enabled = function()
+		local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+		if buftype == "prompt" then
+			return false
+		end
 		-- disable completion in comments
 		local context = require("cmp.config.context")
 		-- keep command mode completion enabled when cursor is in a comment

@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "vim", "vimdoc", "html", "css" },
+	ensure_installed = { "lua", "vim", "vimdoc", "html", "css", "python", "json", "ocaml", "scala", "erlang" },
 	highlight = {
 		enable = true,
 		use_languagetree = true,

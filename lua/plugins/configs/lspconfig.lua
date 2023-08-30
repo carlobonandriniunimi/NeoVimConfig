@@ -84,6 +84,12 @@ local opts = {
 		ocamllsp = {
 			mason = false,
 		},
+		clangd = {
+			cmd = {
+				"clangd",
+				"--offset-encoding=utf-16",
+			},
+		},
 		pyright = {
 			-- mason = false,
 		},
