@@ -111,6 +111,13 @@ cmp.setup({
 			else
 				fallback()
 			end
+			-- if luasnip.expand_or_locally_jumpable() then
+			-- 	luasnip.expand_or_jump()
+			-- elseif cmp.visible() then
+			-- 	cmp.confirm({ select = true })
+			-- else
+			-- 	fallback()
+			-- end
 		end, { "i", "s" }),
 		["<S-CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,

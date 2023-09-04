@@ -32,13 +32,20 @@ local plugins = {
 		end,
 	},
 	-- statusline
+	-- {
+	-- 	"nvim-lualine/lualine.nvim",
+	-- 	event = "VeryLazy",
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- 	config = function()
+	-- 		require("plugins.configs.lualine")
+	-- 	end,
+	-- },
 	{
-		"nvim-lualine/lualine.nvim",
-		enabled = true,
-		event = "VeryLazy",
+		"rebelot/heirline.nvim",
+		event = "UiEnter",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require("plugins.configs.lualine")
+			require("plugins.configs.heirline")
 		end,
 	},
 	{
@@ -115,6 +122,17 @@ local plugins = {
 		end,
 	},
 	{
+		"christoomey/vim-tmux-navigator",
+		event = "VeryLazy",
+	},
+	{
+		"vimpostor/vim-tpipeline",
+		event = "VeryLazy",
+		dependencies = {
+			"rebelot/heirline.nvim",
+		},
+	},
+	{
 		"akinsho/toggleterm.nvim",
 		cmd = "ToggleTerm",
 		keys = {
@@ -143,6 +161,7 @@ local plugins = {
 			-- Copilot
 			{
 				"zbirenbaum/copilot.lua",
+				enabled = true,
 				cmd = "Copilot",
 				event = "InsertEnter",
 				config = function()

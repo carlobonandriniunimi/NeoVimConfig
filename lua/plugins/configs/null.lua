@@ -8,6 +8,7 @@ null_ls.setup({
 		format.black,
 		format.ocamlformat,
 		format.erlfmt,
+		format.scalafmt,
 	},
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
@@ -16,7 +17,6 @@ null_ls.setup({
 				group = augroup,
 				buffer = bufnr,
 				callback = function()
-					local v = vim.fn.winsaveview()
 					vim.lsp.buf.format({
 						bufnr = bufnr,
 						filter = function(client)
@@ -24,7 +24,6 @@ null_ls.setup({
 						end,
 						async = false,
 					})
-					vim.fn.winrestview(v)
 				end,
 			})
 		end
