@@ -1,3 +1,5 @@
+local trouble = require("trouble.providers.telescope")
+
 require("telescope").setup({
 	defaults = {
 		sorting_strategy = "ascending",
@@ -19,6 +21,7 @@ require("telescope").setup({
 				["q"] = require("telescope.actions").close,
 			},
 			i = {
+				["<C-t>"] = trouble.open_with_trouble,
 				["<esc>"] = require("telescope.actions").close,
 				["<C-j>"] = require("telescope.actions").move_selection_next,
 				["<C-k>"] = require("telescope.actions").move_selection_previous,

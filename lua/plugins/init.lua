@@ -33,12 +33,10 @@ local plugins = {
 	},
 	-- statusline
 	{
-		"nvim-lualine/lualine.nvim",
-		enabled = true,
+		"freddiehaddad/feline.nvim",
 		event = "VeryLazy",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require("plugins.configs.lualine")
+			require("plugins.configs.feline")
 		end,
 	},
 	{
@@ -114,6 +112,18 @@ local plugins = {
 			return require("plugins.configs.lsp").fidget
 		end,
 	},
+	-- TMUX stuff
+	{
+		"christoomey/vim-tmux-navigator",
+		event = "VeryLazy",
+	},
+	-- {
+	-- 	"vimpostor/vim-tpipeline",
+	-- 	event = "VeryLazy",
+	-- 	dependencies = {
+	-- 		"freddiehaddad/feline.nvim",
+	-- 	},
+	-- },
 	{
 		"akinsho/toggleterm.nvim",
 		cmd = "ToggleTerm",
@@ -143,6 +153,7 @@ local plugins = {
 			-- Copilot
 			{
 				"zbirenbaum/copilot.lua",
+				enabled = true,
 				cmd = "Copilot",
 				event = "InsertEnter",
 				config = function()
@@ -304,6 +315,15 @@ local plugins = {
 		},
 		config = function(_, opts)
 			require("Comment").setup(opts)
+		end,
+	},
+	{
+		"dstein64/vim-startuptime",
+		-- lazy-load on a command
+		cmd = "StartupTime",
+		-- init is called during startup. Configuration for vim plugins typically should be set in an init function
+		init = function()
+			vim.g.startuptime_tries = 10
 		end,
 	},
 }
