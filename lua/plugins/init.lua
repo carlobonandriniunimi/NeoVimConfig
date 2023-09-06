@@ -31,15 +31,6 @@ local plugins = {
 			require("plugins.configs.nvimtree")
 		end,
 	},
-	-- statusline
-	-- {
-	-- 	"nvim-lualine/lualine.nvim",
-	-- 	event = "VeryLazy",
-	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	-- 	config = function()
-	-- 		require("plugins.configs.lualine")
-	-- 	end,
-	-- },
 	{
 		"freddiehaddad/feline.nvim",
 		event = "VeryLazy",
@@ -124,24 +115,6 @@ local plugins = {
 	{
 		"christoomey/vim-tmux-navigator",
 		event = "VeryLazy",
-	},
-	-- {
-	-- 	"vimpostor/vim-tpipeline",
-	-- 	event = "VeryLazy",
-	-- 	dependencies = {
-	-- 		"freddiehaddad/feline.nvim",
-	-- 	},
-	-- },
-	{
-		"christoomey/vim-tmux-navigator",
-		event = "VeryLazy",
-	},
-	{
-		"vimpostor/vim-tpipeline",
-		event = "VeryLazy",
-		dependencies = {
-			"rebelot/heirline.nvim",
-		},
 	},
 	{
 		"akinsho/toggleterm.nvim",
