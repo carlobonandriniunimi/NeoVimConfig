@@ -20,4 +20,25 @@ M.fidget = {
 	},
 }
 
+M.navic = {
+	lsp = {
+		auto_attach = true,
+	},
+	highlight = false,
+	separator = " > ",
+	depth_limit = 0,
+	depth_limit_indicator = "..",
+	safe_output = true,
+	lazy_update_context = false,
+	click = false,
+}
+
+M.illuminate = {
+	delay = 200,
+	large_file_cutoff = 2000,
+	large_file_overrides = {
+		providers = { "lsp" },
+	},
+}
+
 return M

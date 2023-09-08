@@ -29,8 +29,10 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 -- 	}
 -- end
 
+---@diagnostic disable-next-line
 cmp.setup({
 	-- preselect = cmp.PreselectMode.Item,
+	---@diagnostic disable-next-line
 	completion = {
 		autocomplete = {
 			cmp.TriggerEvent.TextChanged,
@@ -39,6 +41,7 @@ cmp.setup({
 		completeopt = "menu,menuone,noselect",
 	},
 	window = {
+		---@diagnostic disable-next-line
 		completion = {
 			-- border = border("CmpDocBorder"),
 			winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel",
@@ -46,6 +49,7 @@ cmp.setup({
 			scrollbar = false,
 			max_width = 5,
 		},
+		---@diagnostic disable-next-line
 		documentation = {
 			winhighlight = "Normal:Pmenu,FloatBorder:Pmenu",
 			-- winhighlight = "Normal:None",
@@ -73,6 +77,7 @@ cmp.setup({
 			require("luasnip").lsp_expand(args.body)
 		end,
 	},
+	---@diagnostic disable-next-line
 	formatting = {
 		fields = { "kind", "abbr" },
 		format = function(entry, vim_item)
@@ -111,18 +116,7 @@ cmp.setup({
 			else
 				fallback()
 			end
-			-- if luasnip.expand_or_locally_jumpable() then
-			-- 	luasnip.expand_or_jump()
-			-- elseif cmp.visible() then
-			-- 	cmp.confirm({ select = true })
-			-- else
-			-- 	fallback()
-			-- end
 		end, { "i", "s" }),
-		["<S-CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },

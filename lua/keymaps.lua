@@ -3,7 +3,15 @@ local map = vim.keymap.set
 -- general mappings
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 map("n", ";", ":")
-map("n", "<leader>x", "<cmd> bdelete <CR>")
+map("n", "<leader>x", function()
+	-- If there is only one window, act as close buffer
+	if vim.fn.winbufnr(2) == -1 then
+		vim.cmd("bd")
+	-- Else, close window
+	else
+		vim.cmd("q")
+	end
+end)
 map("n", "<leader>q", "<cmd> qa <CR>")
 map("n", "<leader>cc", "<cmd> cd ~/.config/nvim <CR>", { desc = "CD Config" })
 
@@ -18,6 +26,10 @@ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true
 -- better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
+
+-- split windows
+map("n", "<C-w>h", "<cmd> split <CR>")
+map("n", "<C-w>v", "<cmd> vsplit <CR>")
 
 -- move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h")

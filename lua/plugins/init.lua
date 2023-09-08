@@ -32,18 +32,10 @@ local plugins = {
 		end,
 	},
 	{
-		"freddiehaddad/feline.nvim",
+		"rebelot/heirline.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("plugins.configs.feline")
-		end,
-	},
-	{
-		"akinsho/bufferline.nvim",
-		event = "BufAdd",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		opts = function()
-			return require("plugins.configs.bufferline")
+			require("plugins.configs.heirline")
 		end,
 	},
 	-- icons, for UI related plugins
@@ -53,7 +45,6 @@ local plugins = {
 			require("nvim-web-devicons").setup()
 		end,
 	},
-
 	-- syntax highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -61,6 +52,14 @@ local plugins = {
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("plugins.configs.treesitter")
+		end,
+	},
+	{
+		"RRethy/vim-illuminate",
+		event = { "BufReadPost", "BufNewFile" },
+		config = function()
+			local opts = require("plugins.configs.lsp").illuminate
+			require("illuminate").configure(opts)
 		end,
 	},
 	-- UI
@@ -89,9 +88,11 @@ local plugins = {
 	},
 	{
 		"folke/noice.nvim",
+		enabled = true,
 		event = "VeryLazy",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
+			"rebelot/heirline.nvim",
 			{
 				"rcarriga/nvim-notify",
 				opts = function()
@@ -187,7 +188,6 @@ local plugins = {
 			"neovim/nvim-lspconfig",
 		},
 	},
-
 	-- lsp
 	{
 		"neovim/nvim-lspconfig",
@@ -205,6 +205,14 @@ local plugins = {
 				end,
 			},
 		},
+	},
+	{
+		"SmiteshP/nvim-navic",
+		event = "LspAttach",
+		dependencies = { "neovim/nvim-lspconfig" },
+		opts = function()
+			return require("plugins.configs.lsp").navic
+		end,
 	},
 	-- Scala
 	{
@@ -238,7 +246,6 @@ local plugins = {
 			return require("plugins.configs.trouble")
 		end,
 	},
-
 	-- indent lines
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -258,7 +265,31 @@ local plugins = {
 			require("plugins.configs.telescope")
 		end,
 	},
-
+	{
+		"nvim-neorg/neorg",
+		ft = "norg",
+		build = ":Neorg sync-parsers",
+		cmd = "Neorg",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require("neorg").setup({
+				load = {
+					["core.defaults"] = {}, -- Loads default behaviour
+					["core.concealer"] = {}, -- Adds pretty icons to your documents
+					["core.dirman"] = { -- Manages Neorg workspaces
+						config = {
+							workspaces = {
+								notes = "~/Notes",
+							},
+						},
+					},
+				},
+			})
+		end,
+	},
 	-- git status on signcolumn etc
 	{
 		"lewis6991/gitsigns.nvim",
@@ -307,15 +338,6 @@ local plugins = {
 		},
 		config = function(_, opts)
 			require("Comment").setup(opts)
-		end,
-	},
-	{
-		"dstein64/vim-startuptime",
-		-- lazy-load on a command
-		cmd = "StartupTime",
-		-- init is called during startup. Configuration for vim plugins typically should be set in an init function
-		init = function()
-			vim.g.startuptime_tries = 10
 		end,
 	},
 }

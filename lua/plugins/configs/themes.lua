@@ -18,6 +18,9 @@ M.catppuccin = {
 			PmenuThumb = { fg = colors.none, bg = colors.none },
 			TelescopeNormal = { bg = colors.base },
 			TelescopeBorder = { fg = colors.base, bg = colors.base },
+			LazyNormal = { bg = colors.base },
+			MasonNormal = { bg = colors.base },
+			NoicePopup = { bg = colors.base },
 		}
 	end,
 	integrations = {
