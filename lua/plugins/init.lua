@@ -1,5 +1,7 @@
 local plugins = {
+	-- Basic dependency
 	"nvim-lua/plenary.nvim",
+	-- Themes
 	{
 		"catppuccin/nvim",
 		lazy = false,
@@ -24,6 +26,7 @@ local plugins = {
 		-- 	vim.cmd("colorscheme tokyonight")
 		-- end,
 	},
+	-- File Explorer
 	{
 		"nvim-tree/nvim-tree.lua",
 		cmd = { "NvimTreeToggle" },
@@ -117,6 +120,7 @@ local plugins = {
 		"christoomey/vim-tmux-navigator",
 		event = "VeryLazy",
 	},
+	-- Terminal
 	{
 		"akinsho/toggleterm.nvim",
 		cmd = "ToggleTerm",
@@ -131,6 +135,7 @@ local plugins = {
 			require("plugins.configs.toggleterm")
 		end,
 	},
+	-- Completion engine
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
@@ -180,6 +185,7 @@ local plugins = {
 			require("plugins.configs.cmp")
 		end,
 	},
+	-- Install lsp servers
 	{
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
@@ -206,6 +212,7 @@ local plugins = {
 			},
 		},
 	},
+	-- Context
 	{
 		"SmiteshP/nvim-navic",
 		event = "LspAttach",
@@ -214,30 +221,7 @@ local plugins = {
 			return require("plugins.configs.lsp").navic
 		end,
 	},
-	-- Scala
-	{
-		"scalameta/nvim-metals",
-		ft = "scala",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		config = function()
-			local metals_config = require("metals").bare_config()
-			local api = vim.api
-			-- Autocmd that will actually be in charging of starting the whole thing
-			local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
-			api.nvim_create_autocmd("FileType", {
-				-- NOTE: You may or may not want java included here. You will need it if you
-				-- want basic Java support but it may also conflict if you are using
-				-- something like nvim-jdtls which also works on a java filetype autocmd.
-				pattern = { "scala", "sbt" },
-				callback = function()
-					require("metals").initialize_or_attach(metals_config)
-				end,
-				group = nvim_metals_group,
-			})
-		end,
-	},
+	-- Error list
 	{
 		"folke/trouble.nvim",
 		cmd = "Trouble",
@@ -264,6 +248,11 @@ local plugins = {
 		config = function()
 			require("plugins.configs.telescope")
 		end,
+	},
+	{
+		"j-morano/buffer_manager.nvim",
+		event = "BufReadPre",
+		opts = {},
 	},
 	{
 		"nvim-neorg/neorg",
