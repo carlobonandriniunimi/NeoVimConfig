@@ -40,7 +40,8 @@ map("n", "<C-l>", "<C-w>l")
 -- buffer manipulation
 map("n", "H", "<cmd> bprev <CR>")
 map("n", "L", "<cmd> bnext <CR>")
-map("n", "<leader>,", "<cmd> lua require('buffer_manager.ui').toggle_quick_menu()<cr>")
+-- map("n", "<leader>,", "<cmd> lua require('buffer_manager.ui').toggle_quick_menu()<cr>")
+map("n", "<leader>,", "<cmd> Telescope buffers <cr>")
 
 -- lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
@@ -56,12 +57,6 @@ map("n", "<leader><leader>", "<cmd> Telescope find_files <CR>")
 map("n", "<leader>fr", "<cmd> Telescope oldfiles <CR>")
 map("n", "<leader>fw", "<cmd> Telescope live_grep <CR>")
 map("n", "<leader>hc", "<cmd> Telescope colorscheme <CR>")
-
--- comment.nvim
-map("n", "<leader>/", function()
-	require("Comment.api").toggle.linewise.current()
-end)
-map("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>")
 
 -- toggleterm
 map("n", "<C-t>", "<cmd>ToggleTerm<cr>", { desc = "ToggleTerm" })

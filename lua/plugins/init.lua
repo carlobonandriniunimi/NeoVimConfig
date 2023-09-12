@@ -135,6 +135,14 @@ local plugins = {
 			require("plugins.configs.toggleterm")
 		end,
 	},
+	{
+		"willothy/flatten.nvim",
+		opts = function()
+			return require("plugins.configs.flatten")
+		end,
+		lazy = false,
+		priority = 1001,
+	},
 	-- Completion engine
 	{
 		"hrsh7th/nvim-cmp",
@@ -248,11 +256,6 @@ local plugins = {
 		config = function()
 			require("plugins.configs.telescope")
 		end,
-	},
-	{
-		"j-morano/buffer_manager.nvim",
-		event = "BufReadPre",
-		opts = {},
 	},
 	{
 		"nvim-neorg/neorg",

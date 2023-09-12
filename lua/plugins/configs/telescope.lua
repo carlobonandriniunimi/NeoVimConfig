@@ -37,5 +37,13 @@ require("telescope").setup({
 		find_files = {
 			hidden = false, -- Show hidden files
 		},
+		buffers = {
+			show_all_buffers = true,
+			sort_lastused = true,
+			previewer = true,
+			mappings = {
+				i = { ["<c-d>"] = "delete_buffer" },
+			},
+		},
 	},
 })
