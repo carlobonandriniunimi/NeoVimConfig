@@ -135,6 +135,7 @@ local plugins = {
 			require("plugins.configs.toggleterm")
 		end,
 	},
+	-- Don't open a new neovim instance inside toggleterm when opening files
 	{
 		"willothy/flatten.nvim",
 		opts = function()
