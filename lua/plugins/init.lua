@@ -211,15 +211,16 @@ local plugins = {
 			require("plugins.configs.lspconfig")
 		end,
 		dependencies = {
-			-- formatting , linting
 			"williamboman/mason-lspconfig.nvim",
-			{
-				"jose-elias-alvarez/null-ls.nvim",
-				config = function()
-					require("plugins.configs.null")
-				end,
-			},
 		},
+	},
+	-- formatting
+	{
+		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = function()
+			return require("plugins.configs.formatter")
+		end,
 	},
 	-- Context
 	{

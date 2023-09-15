@@ -634,7 +634,6 @@ local WinBar = {
 require("heirline").setup({
 	statusline = StatusLines,
 	winbar = WinBar,
-	-- tabline = BufferLine,
 	opts = {
 		colors = colors, -- Load colors to use
 		-- if the callback returns true, the winbar will be disabled for that window
