@@ -11,8 +11,8 @@ map("n", "<leader>x", function()
 	else
 		vim.cmd("q")
 	end
-end)
-map("n", "<leader>q", "<cmd> qa <CR>")
+end, { desc = "Close buffer" })
+map("n", "<leader>q", "<cmd> qa <CR>", { desc = "Quit all" })
 map("n", "<leader>cc", "<cmd> cd ~/.config/nvim <CR>", { desc = "CD Config" })
 
 -- Clear search with <esc>
@@ -40,8 +40,7 @@ map("n", "<C-l>", "<C-w>l")
 -- buffer manipulation
 map("n", "H", "<cmd> bprev <CR>")
 map("n", "L", "<cmd> bnext <CR>")
--- map("n", "<leader>,", "<cmd> lua require('buffer_manager.ui').toggle_quick_menu()<cr>")
-map("n", "<leader>,", "<cmd> Telescope buffers <cr>")
+map("n", "<leader>,", "<cmd> Telescope buffers <cr>", { desc = "Find buffers" })
 
 -- lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
@@ -50,13 +49,13 @@ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>hm", "<cmd>Mason<cr>", { desc = "Mason" })
 
 -- neotree
-map("n", "<leader>e", "<cmd> NvimTreeToggle <CR>")
+map("n", "<leader>e", "<cmd> NvimTreeToggle <CR>", { desc = "NvimTree" })
 
 -- telescope
-map("n", "<leader><leader>", "<cmd> Telescope find_files <CR>")
-map("n", "<leader>fr", "<cmd> Telescope oldfiles <CR>")
-map("n", "<leader>fw", "<cmd> Telescope live_grep <CR>")
-map("n", "<leader>hc", "<cmd> Telescope colorscheme <CR>")
+map("n", "<leader><leader>", "<cmd> Telescope find_files <CR>", { desc = "Find files" })
+map("n", "<leader>fr", "<cmd> Telescope oldfiles <CR>", { desc = "Find recent files" })
+map("n", "<leader>fw", "<cmd> Telescope live_grep <CR>", { desc = "Find word" })
+map("n", "<leader>hc", "<cmd> Telescope colorscheme <CR>", { desc = "Find colorscheme" })
 
 -- toggleterm
 map("n", "<C-t>", "<cmd>ToggleTerm<cr>", { desc = "ToggleTerm" })
@@ -72,3 +71,4 @@ end, { desc = "Goto references" })
 map("n", "ge", function()
 	require("trouble").open("document_diagnostics")
 end, { desc = "File Diagnostics" })
+map("n", "gt", "<cmd>TodoTrouble<cr>", { desc = "Todo Trouble" })

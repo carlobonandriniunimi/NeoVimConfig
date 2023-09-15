@@ -1,5 +1,17 @@
+---@diagnostic disable-next-line
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "vim", "vimdoc", "html", "css", "python", "json", "ocaml", "scala", "erlang" },
+	ensure_installed = {
+		"lua",
+		"vim",
+		"vimdoc",
+		"html",
+		"css",
+		"python",
+		"json",
+		"markdown",
+		"markdown_inline",
+		"regex",
+	},
 	highlight = {
 		enable = true,
 		use_languagetree = true,
@@ -9,7 +21,6 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 		disable = {
 			"python",
-			"ocaml",
 		},
 	},
 })

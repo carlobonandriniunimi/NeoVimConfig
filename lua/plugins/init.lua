@@ -108,11 +108,14 @@ local plugins = {
 		end,
 	},
 	{
-		"j-hui/fidget.nvim",
-		tag = "legacy", -- NOTE: check when this is updated
-		event = "LspAttach",
-		opts = function()
-			return require("plugins.configs.lsp").fidget
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		config = function()
+			require("plugins.configs.whichkey")
 		end,
 	},
 	-- TMUX stuff
@@ -222,6 +225,15 @@ local plugins = {
 			return require("plugins.configs.formatter")
 		end,
 	},
+	-- lsp progress
+	{
+		"j-hui/fidget.nvim",
+		tag = "legacy", -- NOTE: check when this is updated
+		event = "LspAttach",
+		opts = function()
+			return require("plugins.configs.lsp").fidget
+		end,
+	},
 	-- Context
 	{
 		"SmiteshP/nvim-navic",
@@ -240,6 +252,15 @@ local plugins = {
 			return require("plugins.configs.trouble")
 		end,
 	},
+	-- TODO: comments
+	{
+		"folke/todo-comments.nvim",
+		event = { "BufReadPre" },
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = function()
+			return require("plugins.configs.todo")
+		end,
+	},
 	-- indent lines
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -255,6 +276,9 @@ local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
 		config = function()
 			require("plugins.configs.telescope")
 		end,

@@ -5,26 +5,35 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+local opt = function(table1, table2)
+	return vim.tbl_extend("force", table1, table2)
+end
+
 -- Use LspAttach autocommand to only map the following keys
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
 		local opts = { buffer = ev.buf }
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-		vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-		vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opt(opts, { desc = "Go to declaration" }))
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opt(opts, { desc = "Go to definition" }))
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opt(opts, { desc = "Hover" }))
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opt(opts, { desc = "Go to implementation" }))
+		vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opt(opts, { desc = "Add workspace folder" }))
+		vim.keymap.set(
+			"n",
+			"<space>wr",
+			vim.lsp.buf.remove_workspace_folder,
+			opt(opts, { desc = "Remove workspace folder" })
+		)
 		vim.keymap.set("n", "<space>wl", function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-		end, opts)
-		vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
-		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+		end, opt(opts, { desc = "List workspace folders" }))
+		vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opt(opts, { desc = "Go to type definition" }))
+		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opt(opts, { desc = "Rename" }))
+		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opt(opts, { desc = "Code action" }))
 		vim.keymap.set("n", "gl", function()
 			vim.diagnostic.open_float({ border = "rounded" })
-		end)
+		end, opt(opts, { desc = "Open diagnostic" }))
 	end,
 })
 
