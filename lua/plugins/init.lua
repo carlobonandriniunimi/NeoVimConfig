@@ -16,15 +16,16 @@ local plugins = {
 	},
 	{
 		"folke/tokyonight.nvim",
-		lazy = true, -- Change if needed
+		enabled = false,
+		lazy = false,
 		priority = 1000,
 		opts = function()
 			return require("plugins.configs.themes").tokyonight
 		end,
-		-- config = function(_, opts)
-		-- 	require("tokyonight").setup(opts)
-		-- 	vim.cmd("colorscheme tokyonight")
-		-- end,
+		config = function(_, opts)
+			require("tokyonight").setup(opts)
+			vim.cmd("colorscheme tokyonight")
+		end,
 	},
 	-- File Explorer
 	{
@@ -37,6 +38,7 @@ local plugins = {
 	{
 		"rebelot/heirline.nvim",
 		event = "VeryLazy",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("plugins.configs.heirline")
 		end,
@@ -44,9 +46,16 @@ local plugins = {
 	-- icons, for UI related plugins
 	{
 		"nvim-tree/nvim-web-devicons",
-		config = function()
-			require("nvim-web-devicons").setup()
-		end,
+		opts = {
+			strict = true,
+			override_by_extension = {
+				["norg"] = {
+					icon = "",
+					color = "#f1502f",
+					name = "Neorg",
+				},
+			},
+		},
 	},
 	-- syntax highlighting
 	{
@@ -57,6 +66,7 @@ local plugins = {
 			require("plugins.configs.treesitter")
 		end,
 	},
+	-- highlight word under cursor
 	{
 		"RRethy/vim-illuminate",
 		event = { "BufReadPost", "BufNewFile" },
@@ -117,11 +127,6 @@ local plugins = {
 		config = function()
 			require("plugins.configs.whichkey")
 		end,
-	},
-	-- TMUX stuff
-	{
-		"christoomey/vim-tmux-navigator",
-		event = "VeryLazy",
 	},
 	-- Terminal
 	{
@@ -271,6 +276,12 @@ local plugins = {
 		config = function(_, opts)
 			require("indent_blankline").setup(opts)
 		end,
+	},
+	{
+		"HiPhish/rainbow-delimiters.nvim",
+		pin = true, -- TODO: remove this when LanguageTree:children() is fixed
+		event = "BufReadPre",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
 	-- files finder etc
 	{
