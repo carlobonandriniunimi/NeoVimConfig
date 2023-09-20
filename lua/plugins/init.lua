@@ -35,6 +35,7 @@ local plugins = {
 			require("plugins.configs.nvimtree")
 		end,
 	},
+	-- Statusline, Bufferline, Winbar
 	{
 		"rebelot/heirline.nvim",
 		event = "VeryLazy",
@@ -42,6 +43,19 @@ local plugins = {
 		config = function()
 			require("plugins.configs.heirline")
 		end,
+	},
+	{
+		"Bekaboo/dropbar.nvim", -- TODO: check against navic
+		event = "BufReadPre",
+		opts = function()
+			return require("plugins.configs.dropbar")
+		end,
+	},
+	-- Don't go over the 80 char
+	{
+		"Bekaboo/deadcolumn.nvim",
+		event = "BufReadPost",
+		opts = {},
 	},
 	-- icons, for UI related plugins
 	{
@@ -77,12 +91,18 @@ local plugins = {
 	},
 	-- UI
 	{
+		"glepnir/dashboard-nvim",
+		event = "VimEnter",
+		opts = {},
+		dependencies = { { "nvim-tree/nvim-web-devicons" } },
+	},
+	{
 		"nmac427/guess-indent.nvim",
 		event = "BufReadPre",
 		opts = {},
 	},
 	{
-		"stevearc/dressing.nvim",
+		"stevearc/dressing.nvim", -- TODO: check if needs to be loaded earlier
 		opts = function()
 			return require("plugins.configs.noice").dressing
 		end,
@@ -105,7 +125,6 @@ local plugins = {
 		event = "VeryLazy",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
-			"rebelot/heirline.nvim",
 			{
 				"rcarriga/nvim-notify",
 				opts = function()
@@ -240,19 +259,19 @@ local plugins = {
 		end,
 	},
 	-- Context
-	{
-		"SmiteshP/nvim-navic",
-		event = "LspAttach",
-		dependencies = { "neovim/nvim-lspconfig" },
-		opts = function()
-			return require("plugins.configs.lsp").navic
-		end,
-	},
+	-- {
+	-- 	"SmiteshP/nvim-navic",
+	-- 	event = "LspAttach",
+	-- 	dependencies = { "neovim/nvim-lspconfig" },
+	-- 	opts = function()
+	-- 		return require("plugins.configs.lsp").navic
+	-- 	end,
+	-- },
 	-- Error list
 	{
 		"folke/trouble.nvim",
 		cmd = "Trouble",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		dependenckes = { "nvim-tree/nvim-web-devicons" },
 		opts = function()
 			return require("plugins.configs.trouble")
 		end,
@@ -313,6 +332,7 @@ local plugins = {
 							workspaces = {
 								notes = "~/Notes",
 							},
+							default_workspace = "notes",
 						},
 					},
 				},
@@ -369,6 +389,41 @@ local plugins = {
 			require("Comment").setup(opts)
 		end,
 	},
+	{
+		"folke/flash.nvim",
+		opts = {},
+		keys = {
+			{
+				"s",
+				mode = { "n", "o", "x" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			{
+				"S",
+				mode = { "n", "o", "x" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+		},
+	},
+	-- Measure startuptime
+	{
+		"dstein64/vim-startuptime",
+		cmd = "StartupTime",
+		config = function()
+			vim.g.startuptime_tries = 100
+		end,
+	},
+	-- Embed tmux into statusline
+	-- {
+	-- 	"vimpostor/vim-tpipeline",
+	-- 	event = "VeryLazy",
+	-- },
 }
 
 require("lazy").setup(plugins, require("plugins.configs.lazy"))

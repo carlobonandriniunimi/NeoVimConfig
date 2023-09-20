@@ -4,6 +4,7 @@ return {
 		lua = { "stylua" },
 		-- Conform will run multiple formatters sequentially
 		python = { "isort", "black" },
+		sh = { "beautysh" },
 		-- Use a sub-list to run only the first available formatter
 		-- javascript = { { "prettierd", "prettier" } },
 		-- Use the "*" filetype to run formatters on all files.

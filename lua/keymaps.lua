@@ -62,7 +62,6 @@ map("n", "<C-t>", "<cmd>ToggleTerm<cr>", { desc = "ToggleTerm" })
 map("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Horizontal" })
 map("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "Vertical" })
 map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = "Float" })
-map("n", "<leader>tt", "<cmd>ToggleTerm direction=tab<cr>", { desc = "Tab" })
 
 -- trouble
 map("n", "gr", function()

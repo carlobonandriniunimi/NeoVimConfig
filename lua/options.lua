@@ -6,6 +6,7 @@ vim.g.maplocalleader = " "
 opt.autowrite = true -- Enable auto write
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
 opt.cmdheight = 0 -- Cmdline height (set to 0 by noice)
+opt.colorcolumn = "82" -- Line length marker
 opt.completeopt = "menu,menuone,preview"
 opt.conceallevel = 3 -- Hide * markup for bold and italic
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
