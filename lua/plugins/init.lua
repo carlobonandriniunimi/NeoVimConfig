@@ -258,15 +258,6 @@ local plugins = {
 			return require("plugins.configs.lsp").fidget
 		end,
 	},
-	-- Context
-	-- {
-	-- 	"SmiteshP/nvim-navic",
-	-- 	event = "LspAttach",
-	-- 	dependencies = { "neovim/nvim-lspconfig" },
-	-- 	opts = function()
-	-- 		return require("plugins.configs.lsp").navic
-	-- 	end,
-	-- },
 	-- Error list
 	{
 		"folke/trouble.nvim",
@@ -298,7 +289,6 @@ local plugins = {
 	},
 	{
 		"HiPhish/rainbow-delimiters.nvim",
-		pin = true, -- TODO: remove this when LanguageTree:children() is fixed
 		event = "BufReadPre",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},

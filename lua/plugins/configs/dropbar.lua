@@ -6,6 +6,7 @@ return {
 				and vim.api.nvim_buf_get_name(buf) ~= ""
 				and not vim.wo[win].diff
 				and vim.filetype ~= "terminal"
+				and vim.bo.filetype ~= "Trouble"
 		end,
 	},
 	icons = {
