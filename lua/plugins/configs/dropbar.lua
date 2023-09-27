@@ -32,9 +32,15 @@ return {
 		sources = function(buf, _)
 			local sources = require("dropbar.sources")
 			local utils = require("dropbar.utils")
+			local filename = {
+				get_symbols = function(buff, win, cursor)
+					local path = sources.path.get_symbols(buff, win, cursor)
+					return { path[#path] }
+				end,
+			}
 			if vim.bo[buf].ft == "markdown" then
 				return {
-					sources.path,
+					filename,
 					utils.source.fallback({
 						sources.treesitter,
 						sources.markdown,
@@ -43,26 +49,12 @@ return {
 				}
 			end
 			return {
-				sources.path,
+				filename,
 				utils.source.fallback({
 					sources.lsp,
 					sources.treesitter,
 				}),
 			}
 		end,
-	},
-	sources = {
-		path = {
-			-- Fullpath
-			-- relative_to = function()
-			-- 	return vim.fn.getcwd()
-			-- end,
-			-- Only filename
-			relative_to = function(_)
-				local fullpath = vim.api.nvim_buf_get_name(0)
-				local filename = vim.fn.fnamemodify(fullpath, ":t")
-				return fullpath:sub(0, #fullpath - #filename)
-			end,
-		},
 	},
 }
